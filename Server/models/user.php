@@ -1,7 +1,7 @@
 <?php
 include("Model.php");
 
-class User extends Model {
+class user extends model {
     private int $id;
     private string $name;
     private string $email;

@@ -68,7 +68,7 @@ abstract class model {
     }
 
     
-public function findById($primaryKeyValue, $primaryKey = 'id', mysqli $connection) {
+public static function findById($primaryKeyValue, $primaryKey = 'id', mysqli $connection) {
     $sql = "SELECT * FROM " . static::$table . " WHERE $primaryKey = ?";
     $stmt = $connection->prepare($sql);
 
@@ -83,7 +83,7 @@ public function findById($primaryKeyValue, $primaryKey = 'id', mysqli $connectio
     return $stmt->get_result()->fetch_assoc();
 }
 
- public function findAll(mysqli $connection) {
+ public static function findAll(mysqli $connection) {
         $sql = "SELECT * FROM " . static::$table;
         $stmt = $connection->prepare($sql);
 
