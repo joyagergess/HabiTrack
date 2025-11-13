@@ -82,5 +82,25 @@ public function findById($primaryKeyValue, $primaryKey = 'id', mysqli $connectio
 
     return $stmt->get_result()->fetch_assoc();
 }
+
+ public function findAll(mysqli $connection) {
+        $sql = "SELECT * FROM " . static::$table;
+        $stmt = $connection->prepare($sql);
+
+        if (!$stmt) {
+            throw new Exception("Prepare failed: " . $connection->error);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $rows = [];
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+ 
 }
 ?>
