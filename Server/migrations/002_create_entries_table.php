@@ -1,11 +1,10 @@
 <?php
 include("../connection/connection.php");
 
-$sql = "CREATE TABLE IF NOT EXISTS entries (
+
+$sql = "CREATE TABLE entries (
     id INT(255) AUTO_INCREMENT PRIMARY KEY,
     user_id INT(255) NOT NULL,
-    free_text TEXT NOT NULL,
-    json_text JSON NULL,
     steps INT NULL,
     caffeine INT NULL,
     sleep_time TIME NULL,
@@ -17,5 +16,5 @@ $sql = "CREATE TABLE IF NOT EXISTS entries (
 $query = $connection->prepare($sql);
 $query->execute();
 
-echo "Entries table created ";
+echo "Entries table created";
 ?>
