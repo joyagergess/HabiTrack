@@ -67,5 +67,20 @@ abstract class model {
         return $stmt->execute();
     }
 
+    
+public function findById($primaryKeyValue, $primaryKey = 'id', mysqli $connection) {
+    $sql = "SELECT * FROM " . static::$table . " WHERE $primaryKey = ?";
+    $stmt = $connection->prepare($sql);
+
+    if (!$stmt) {
+        throw new Exception("Prepare failed: " . $connection->error);
+    }
+
+    $value_type = $this->get_values_type($primaryKeyValue);
+    $stmt->bind_param($value_type, $primaryKeyValue);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_assoc();
+}
 }
 ?>
