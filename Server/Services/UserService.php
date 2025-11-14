@@ -26,5 +26,14 @@ class UserService {
     public static function findAllUsers(mysqli $connection) {
         return user::findAll($connection);
     }
+
+    public static function findUserByEmail(string $email, mysqli $connection) {
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_assoc();
+   }  
+
 }
 ?>
