@@ -21,4 +21,7 @@ $apis = [
     '/entry/update'    => ['controller' => 'EntryController', 'method' => 'update', 'type' => 'PUT'],
     '/entry/delete'    => ['controller' => 'EntryController', 'method' => 'delete', 'type' => 'DELETE'],
     
+    '/auth/signup' => ['controller' => 'AuthController', 'method' => 'signup', 'type' => 'POST'],
+    '/auth/login'  => ['controller' => 'AuthController', 'method' => 'login', 'type' => 'POST'],
+
 ];

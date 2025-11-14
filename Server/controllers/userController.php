@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/../models/User.php");
+require_once(__DIR__ . "/../models/user.php");
 require_once(__DIR__ . "/../connection/connection.php");
 require_once(__DIR__ . "/../services/UserService.php");
 
@@ -121,5 +121,8 @@ class UserController {
             echo ResponseService::response(500, "Failed to delete user");
         }
     }
+
+
+
 }
 ?>
