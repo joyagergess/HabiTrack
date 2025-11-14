@@ -1,8 +1,41 @@
-document.getElementById("login-btn").addEventListener('click', async ()=>{
-    const email =document.getElementById("email").value;
-    const password =document.getElementById("password").value;
-    
-    if (!email || !password){
-        document.getElementById("login-message").textContent="Enter your email and password";
+const base_url = "http://localhost/HabiTrack/Server";
+
+
+document.getElementById("login-btn").addEventListener('click', async () => {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const loginMessage = document.getElementById("login-message");
+
+    loginMessage.textContent = "";
+
+    if (!email || !password) {
+        loginMessage.style.color = "red";
+        loginMessage.textContent = "Enter your email and password";
+        return;
     }
-})
+
+    let response; 
+
+    try {
+        response = await axios.post(base_url + "/auth/login", { email, password });
+
+        if (response.data.status === 200) {
+            loginMessage.style.color = "green";
+            loginMessage.textContent = "Login successful!";
+            console.log("User data:", response.data.data);
+
+           
+        } else {
+            loginMessage.style.color = "red";
+            loginMessage.textContent = response.data.message || "Login failed";
+        }
+
+    } catch (error) {
+        console.error("Axios error:", error);
+
+            loginMessage.style.color = "red";
+            loginMessage.textContent = "Network error. Please check your server.";
+        
+    }
+});
+
