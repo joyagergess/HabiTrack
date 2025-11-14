@@ -1,18 +1,19 @@
 <?php
-$prompts = require_once('PromptService.php');
+
+$prompts = require_once(__DIR__ . "/PromptService.php");
 
 function callAI(string $promptKey, string $userText): ?array {
     global $prompts;
-    
+
     $fullPrompt = $prompts[$promptKey] . "\n\nUser Input: " . $userText;
 
     $response = sendAIRequest($fullPrompt);
     return parseAIResponse($response);
 }
 
-
 function sendAIRequest(string $prompt): string {
     $apiKey = ""; 
+
     $data = [
         'model' => 'gpt-3.5-turbo',
         'messages' => [
@@ -31,14 +32,10 @@ function sendAIRequest(string $prompt): string {
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
     $response = curl_exec($ch);
-
-    if (curl_errno($ch)) {
-        throw new Exception('OpenAI Request Error: ' . curl_error($ch));
-    }
-
     curl_close($ch);
     return $response;
 }
+
 
 function parseAIResponse(string $response): ?array {
     $responseData = json_decode($response, true);
