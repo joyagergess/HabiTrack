@@ -1,28 +1,28 @@
 <?php
-include(__DIR__ . "/../models/entries.php");
+require_once(__DIR__ . "/../models/Entry.php");
 
-class EntriesService {
+class EntryService {
 
     public static function getAll(mysqli $connection) {
-        return entries::findAll($connection);
+        return Entry::findAll($connection);
     }
 
     public static function getById(int $id, mysqli $connection) {
-        return entries::findById($id, "id", $connection);
+        return Entry::findById($id, "id", $connection);
     }
 
     public static function create(array $data, mysqli $connection) {
-        $entry = new entries($data);
+        $entry = new Entry($data);
         return $entry->create($data, $connection);
     }
 
     public static function update(int $id, array $data, mysqli $connection) {
-        $entry = new entries([]);
+        $entry = new Entry([]);
         return $entry->update($data, "id", $id, $connection);
     }
 
     public static function delete(int $id, mysqli $connection) {
-        $entry = new entries([]);
+        $entry = new Entry([]);
         return $entry->delete("id", $id, $connection);
     }
 
@@ -34,3 +34,4 @@ class EntriesService {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
+?>

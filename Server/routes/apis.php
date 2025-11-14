@@ -15,9 +15,10 @@ $apis = [
     '/habit/update'    => ['controller' => 'HabitController', 'method' => 'update', 'type' => 'PUT'],
     '/habit/delete'    => ['controller' => 'HabitController', 'method' => 'delete', 'type' => 'DELETE'],
 
-    '/entries'         => ['controller' => 'EntriesController', 'method' => 'getAll', 'type' => 'GET'],
-    '/entry'           => ['controller' => 'EntriesController', 'method' => 'getOne', 'type' => 'GET'],
-    '/entry/create'    => ['controller' => 'EntriesController', 'method' => 'create', 'type' => 'POST'],
-    '/entry/update'    => ['controller' => 'EntriesController', 'method' => 'update', 'type' => 'PUT'],
-    '/entry/delete'    => ['controller' => 'EntriesController', 'method' => 'delete', 'type' => 'DELETE'],
+    '/entries'         => ['controller' => 'EntryController', 'method' => 'getAll', 'type' => 'GET'],
+    '/entry'           => ['controller' => 'EntryController', 'method' => 'getOne', 'type' => 'GET'],
+    '/entry/create'    => ['controller' => 'EntryController', 'method' => 'create', 'type' => 'POST'],
+    '/entry/update'    => ['controller' => 'EntryController', 'method' => 'update', 'type' => 'PUT'],
+    '/entry/delete'    => ['controller' => 'EntryController', 'method' => 'delete', 'type' => 'DELETE'],
+    
 ];

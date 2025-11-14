@@ -2,50 +2,91 @@
 require_once(__DIR__ . "/../models/User.php");
 require_once(__DIR__ . "/../connection/connection.php");
 require_once(__DIR__ . "/../services/HabitService.php");
+require_once(__DIR__ . "/../services/ResponseService.php");
 
 class habitController {
 
-    public static function create(mysqli $connection) {
+    public static function create() {
+        global $connection;
+
         $data = json_decode(file_get_contents("php://input"), true);
 
         if (HabitService::createHabit($data, $connection)) {
-            echo json_encode(["message" => "Habit created successfully"]);
+            echo ResponseService::response(200, "Habit created successfully");
         } else {
-            echo json_encode(["error" => "Failed to create habit"]);
+            echo ResponseService::response(500, "Failed to create habit");
         }
     }
 
-    public static function update(mysqli $connection, int $id) {
+    public static function update() {
+        global $connection;
+
         $data = json_decode(file_get_contents("php://input"), true);
 
+      
+
+        if ($id <= 0) {
+            echo ResponseService::response(400, "Habit ID is required");
+            return;
+        }
+
         if (HabitService::updateHabit($data, $id, $connection)) {
-            echo json_encode(["message" => "Habit updated successfully"]);
+            echo ResponseService::response(200, "Habit updated successfully");
         } else {
-            echo json_encode(["error" => "Failed to update habit"]);
+            echo ResponseService::response(500, "Failed to update habit");
         }
     }
 
-    public static function delete(mysqli $connection, int $id) {
+    public static function delete() {
+        global $connection;
+
+        $id = intval($_GET["id"] ?? 0);
+
+        if ($id <= 0) {
+            echo ResponseService::response(400, "Habit ID is required");
+            return;
+        }
+
         if (HabitService::deleteHabit($id, $connection)) {
-            echo json_encode(["message" => "Habit deleted successfully"]);
+            echo ResponseService::response(200, "Habit deleted successfully");
         } else {
-            echo json_encode(["error" => "Failed to delete habit"]);
+            echo ResponseService::response(500, "Failed to delete habit");
         }
     }
 
-    public static function getOne(mysqli $connection, int $id) {
+    public static function getOne() {
+        global $connection;
+
+        $id = intval($_GET["id"] ?? 0);
+
+        if ($id <= 0) {
+            echo ResponseService::response(400, "Habit ID is required");
+            return;
+        }
+
         $habit = HabitService::findHabitById($id, $connection);
-        echo json_encode($habit ?: ["error" => "Habit not found"]);
+        echo ResponseService::response($habit ? 200 : 404, $habit ?: "Habit not found");
     }
 
-    public static function getAll(mysqli $connection) {
+    public static function getAll() {
+        global $connection;
+
         $habits = HabitService::findAllHabits($connection);
-        echo json_encode($habits);
+        echo ResponseService::response(200, $habits);
     }
 
-    public static function getByUser(mysqli $connection, int $user_id) {
+    public static function getByUser() {
+        global $connection;
+
+        $user_id = intval($_GET["user_id"] ?? 0);
+
+        if ($user_id <= 0) {
+            echo ResponseService::response(400, "User ID is required");
+            return;
+        }
+
         $habits = HabitService::findHabitsByUser($user_id, $connection);
-        echo json_encode($habits);
+        echo ResponseService::response(200, $habits);
     }
 }
 ?>
