@@ -22,9 +22,10 @@ document.getElementById("login-btn").addEventListener('click', async () => {
         if (response.data.status === 200) {
             loginMessage.style.color = "green";
             loginMessage.textContent = "Login successful!";
-            console.log("User data:", response.data.data);
-
            
+            localStorage.setItem("userId", response.data.data.id);
+             window.location.href = "dashboard.html";
+
         } else {
             loginMessage.style.color = "red";
             loginMessage.textContent = response.data.message || "Login failed";

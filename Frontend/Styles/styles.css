@@ -225,3 +225,58 @@ p {
 .signup-text a:hover {
   text-decoration: underline;
 }
+
+
+/*dashboard*/
+
+.dashboard {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.entry-section {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.entry-section textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.entry-section .btn-primary {
+  background-color: #50aaff;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.charts-section {
+  display: grid;
+  gap: 40px;
+}
+
+.chart-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
