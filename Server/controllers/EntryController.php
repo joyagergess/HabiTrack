@@ -32,12 +32,22 @@ class EntryController {
 
         $parsedData['user_id'] = $data['user_id'] ?? null;
 
+         $entryData = [
+            "user_id"  => $data["user_id"] ?? null,
+            "text"     => $data["text"],
+            "food"     => $parsed["food"] ?? null,
+            "calories" => $parsed["calories"] ?? null,
+            "quantity" => $parsed["quantity"] ?? null,
+            "time"     => $parsed["time"] ?? null
+        ];
+        
         if (EntryService::create($parsedData, $connection)) {
             echo json_encode(["message" => "Entry created successfully"]);
         } else {
             echo json_encode(["error" => "Failed to create entry"]);
         }
       }
+
 
     public static function update() {
         global $connection;
