@@ -1,20 +1,33 @@
 <?php
 require_once(__DIR__ . "/../models/Entry.php");
 require_once(__DIR__ . "/../services/EntryService.php");
+require_once(__DIR__ . "/../services/AIService.php");
 require_once(__DIR__ . "/../connection/connection.php");
 
 class EntryController {
 
-    public static function create() {
-        global $connection;
-        $data = json_decode(file_get_contents("php://input"), true);
+   public static function create() {
+    global $connection;
+    $data = json_decode(file_get_contents("php://input"), true);
 
-        if (EntryService::create($data, $connection)) {
-            echo json_encode(["message" => "Entry created successfully"]);
-        } else {
-            echo json_encode(["error" => "Failed to create entry"]);
-        }
-    }
+    if (empty($data['text'])) {
+        echo json_encode(["error" => "No entry text provided"]);
+        return;
+     }
+ 
+     $parsedData = callAI('parseEntry', $data['text']);
+     if (!$parsedData) {
+         echo json_encode(["error" => "Failed to parse entry"]);
+         return;
+     }
+     $parsedData['user_id'] = $data['user_id'] ?? null;
+     if (EntryService::create($parsedData, $connection)) {
+         echo json_encode(["message" => "Entry created successfully"]);
+     } else {
+         echo json_encode(["error" => "Failed to create entry"]);
+     }
+   }
+
 
     public static function update() {
         global $connection;
