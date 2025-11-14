@@ -1,5 +1,5 @@
 <?php
-include("Model.php");
+include("model.php");
 
 class habit extends model {
     private int $id;
