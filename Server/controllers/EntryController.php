@@ -24,6 +24,7 @@ class EntryController {
         echo json_encode(["error" => "Failed to parse entry"]);
         return;
     }
+    
     $entryData = [
     "user_id"     => $data["user_id"],
     "steps"       => $parsedData["steps"] ?? 0,
@@ -31,8 +32,6 @@ class EntryController {
     "sleep_time"  => $parsedData["sleep_time"] ?? "00:00:00",
     "sleep_hours" => $parsedData["sleep_hours"] ?? 0
 ];
-
-
 
     if (EntryService::create($entryData, $connection)) {
         echo json_encode(["message" => "Entry created successfully"]);
