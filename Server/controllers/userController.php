@@ -5,7 +5,12 @@ require_once(__DIR__ . "/../services/UserService.php");
 
 class UserController {
 
-   
+
+    private function getRequestData() {
+        return json_decode(file_get_contents("php://input"), true) ?? [];
+    }
+
+
     public function getUserByID() {
         global $connection;
 
@@ -15,7 +20,7 @@ class UserController {
                 return;
             }
 
-            $id = $_GET["id"];
+            $id = intval($_GET["id"]);
             $user = UserService::findUserByID($id, $connection);
 
             if ($user) {
@@ -29,7 +34,6 @@ class UserController {
         }
     }
 
- 
     public function getUsers() {
         global $connection;
 
@@ -42,22 +46,18 @@ class UserController {
         }
     }
 
-    
     public function createUser() {
         global $connection;
 
-      
-        if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])) {
+        $data = $this->getRequestData();
+
+        if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
             echo ResponseService::response(400, "Name, email, and password are required");
             return;
         }
 
-        $data = [
-            'name' => $_POST['name'],
-            'email' => $_POST['email'],
-            'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
-            'role' => $_POST['role'] ?? 'user'
-        ];
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        $data['role'] = $data['role'] ?? 'user';
 
         $user = UserService::createUser($data, $connection);
 
@@ -71,26 +71,24 @@ class UserController {
     public function updateUser() {
         global $connection;
 
-        if (empty($_POST["id"])) {
+        $data = $this->getRequestData();
+
+        if (empty($data["id"])) {
             echo ResponseService::response(400, "User ID is required");
             return;
         }
 
-        $id = $_POST["id"];
+        $id = intval($data["id"]);
 
-        if (empty($_POST["name"]) || empty($_POST["email"])) {
+        if (empty($data["name"]) || empty($data["email"])) {
             echo ResponseService::response(400, "Name and email are required");
             return;
         }
 
-        $data = [
-            "name" => $_POST["name"],
-            "email" => $_POST["email"],
-            "role" => $_POST["role"] ?? 'user'
-        ];
-
-        if (!empty($_POST['password'])) {
-            $data['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        if (!empty($data["password"])) {
+            $data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
+        } else {
+            unset($data["password"]);
         }
 
         $updated = UserService::updateUser($data, $id, $connection);
@@ -102,16 +100,19 @@ class UserController {
         }
     }
 
-  
+ 
     public function deleteUser() {
         global $connection;
 
-        if (empty($_POST["id"])) {
+        $data = $this->getRequestData();
+
+        if (empty($data["id"])) {
             echo ResponseService::response(400, "User ID is required");
             return;
         }
 
-        $id = $_POST["id"];
+        $id = intval($data["id"]);
+
         $deleted = UserService::deleteUser($id, $connection);
 
         if ($deleted) {

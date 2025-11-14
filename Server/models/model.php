@@ -67,8 +67,9 @@ abstract class model {
         return $stmt->execute();
     }
 
-    
-public static function findById($primaryKeyValue, $primaryKey = 'id', mysqli $connection) {
+
+public static function findById($primaryKeyValue, string $primaryKey, mysqli $connection) {
+
     $sql = "SELECT * FROM " . static::$table . " WHERE $primaryKey = ?";
     $stmt = $connection->prepare($sql);
 
@@ -76,12 +77,15 @@ public static function findById($primaryKeyValue, $primaryKey = 'id', mysqli $co
         throw new Exception("Prepare failed: " . $connection->error);
     }
 
-    $value_type = $this->get_values_type($primaryKeyValue);
+    $temp = new static([]);
+    $value_type = $temp->get_values_type($primaryKeyValue);
+
     $stmt->bind_param($value_type, $primaryKeyValue);
     $stmt->execute();
 
     return $stmt->get_result()->fetch_assoc();
 }
+
 
  public static function findAll(mysqli $connection) {
         $sql = "SELECT * FROM " . static::$table;

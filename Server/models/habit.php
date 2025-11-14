@@ -61,7 +61,7 @@ class habit extends model {
         return $this->created_at; 
     }
 
-    -
+    
     public function __toString(): string {
         return "{$this->id} | {$this->name} | {$this->category} | {$this->target} | User: {$this->user_id} | {$this->created_at}";
     }
