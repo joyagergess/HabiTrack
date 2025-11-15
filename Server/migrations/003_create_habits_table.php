@@ -6,7 +6,8 @@ $sql = "CREATE TABLE IF NOT EXISTS habits (
     user_id INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
-    target VARCHAR(255) NOT NULL,
+    target VARCHAR(255) DEFAULT NULL,
+    status TINYINT(1) DEFAULT 1, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )";

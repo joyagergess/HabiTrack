@@ -1,4 +1,4 @@
-const base_url = "http://localhost/HabiTrack/Server";
+
 
 document.getElementById("signup-btn").addEventListener('click', async () => {
     const name = document.getElementById("name").value.trim();
@@ -17,7 +17,7 @@ document.getElementById("signup-btn").addEventListener('click', async () => {
     let response;
 
     try {
-        response = await axios.post(base_url + "/auth/signup", { name, email, password });
+        response = await axios.post(`${base_url}/auth/signup`, { name, email, password });
 
         if (response.data.status === 200) {
             signupMessage.style.color = "green";

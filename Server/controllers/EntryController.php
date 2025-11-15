@@ -4,58 +4,72 @@ require_once(__DIR__ . "/../connection/connection.php");
 require_once(__DIR__ . "/../models/Entry.php");
 require_once(__DIR__ . "/../services/EntryService.php");
 require_once(__DIR__ . "/../services/AIService.php");
-
+require_once(__DIR__ . "/../services/ResponseService.php");
 
 class EntryController {
 
     public static function create() {
-    global $connection;
-
-    $data = json_decode(file_get_contents("php://input"), true);
-
-    if (empty($data['text'])) {
-        echo json_encode(["error" => "No entry text provided"]);
-        return;
-    }
-
-    $parsedData = callAI('parseEntry', $data['text']);
-
-    if (!$parsedData) {
-        echo json_encode(["error" => "Failed to parse entry"]);
-        return;
-    }
-    
-    $entryData = [
-    "user_id"     => $data["user_id"],
-    "steps"       => $parsedData["steps"] ?? 0,
-    "caffeine"    => $parsedData["caffeine"] ?? 0,
-    "sleep_time"  => $parsedData["sleep_time"] ?? "00:00:00",
-    "sleep_hours" => $parsedData["sleep_hours"] ?? 0
-];
-
-    if (EntryService::create($entryData, $connection)) {
-        echo json_encode(["message" => "Entry created successfully"]);
-    } else {
-        echo json_encode(["error" => "Failed to create entry"]);
-    }
-  }
-
-
-
-    public static function update() {
         global $connection;
         $data = json_decode(file_get_contents("php://input"), true);
-        $id = intval($_GET['id'] ?? 0);
 
-        if (!$id) {
-            echo json_encode(["error" => "ID required"]);
+        if (empty($data['text'])) {
+            echo ResponseService::response(400, ["message" => "No entry text provided"]);
             return;
         }
 
-        if (EntryService::update($id, $data, $connection)) {
-            echo json_encode(["message" => "Entry updated successfully"]);
+        $parsedData = callAI('parseEntry', $data['text']);
+        if (!$parsedData) {
+            echo ResponseService::response(500, ["message" => "Failed to parse entry"]);
+            return;
+        }
+
+        $entryData = [
+            "user_id"     => $data["user_id"],
+            "free_text"   => $data["text"],
+            "steps"       => $parsedData["steps"] ?? null,
+            "caffeine"    => $parsedData["caffeine"] ?? null,
+            "sleep_time"  => $parsedData["sleep_time"] ?? null,
+            "sleep_hours" => $parsedData["sleep_hours"] ?? null
+        ];
+
+        if (EntryService::create($entryData, $connection)) {
+            echo ResponseService::response(200, ["message" => "Entry created successfully"]);
         } else {
-            echo json_encode(["error" => "Failed to update entry"]);
+            echo ResponseService::response(500, ["message" => "Failed to create entry"]);
+        }
+    }
+
+    
+    public static function update() {
+        global $connection;
+        $id = intval($_GET['id'] ?? 0);
+        $data = json_decode(file_get_contents("php://input"), true);
+    
+        if (!$id) {
+            echo ResponseService::response(400, ["message" => "ID required"]);
+            return;
+        }
+    
+        if (empty($data['free_text'])) {
+            echo ResponseService::response(400, ["message" => "No entry text provided"]);
+            return;
+        }
+
+        $parsedData = callAI('parseEntry', $data['free_text']);
+        if (!$parsedData) {
+            echo ResponseService::response(500, ["message" => "Failed to parse entry"]);
+            return;
+        }
+    
+        $data['steps'] = $parsedData['steps'] ?? null;
+        $data['caffeine'] = $parsedData['caffeine'] ?? null;
+        $data['sleep_time'] = $parsedData['sleep_time'] ?? null;
+        $data['sleep_hours'] = $parsedData['sleep_hours'] ?? null;
+    
+        if (EntryService::update($id, $data, $connection)) {
+            echo ResponseService::response(200, ["message" => "Entry updated successfully"]);
+        } else {
+            echo ResponseService::response(500, ["message" => "Failed to update entry"]);
         }
     }
 
@@ -64,14 +78,14 @@ class EntryController {
         $id = intval($_GET['id'] ?? 0);
 
         if (!$id) {
-            echo json_encode(["error" => "ID required"]);
+            echo ResponseService::response(400, ["message" => "ID required"]);
             return;
         }
 
         if (EntryService::delete($id, $connection)) {
-            echo json_encode(["message" => "Entry deleted successfully"]);
+            echo ResponseService::response(200, ["message" => "Entry deleted successfully"]);
         } else {
-            echo json_encode(["error" => "Failed to delete entry"]);
+            echo ResponseService::response(500, ["message" => "Failed to delete entry"]);
         }
     }
 
@@ -80,18 +94,22 @@ class EntryController {
         $id = intval($_GET['id'] ?? 0);
 
         if (!$id) {
-            echo json_encode(["error" => "ID required"]);
+            echo ResponseService::response(400, ["message" => "ID required"]);
             return;
         }
 
         $entry = EntryService::getById($id, $connection);
-        echo json_encode($entry ?: ["error" => "Entry not found"]);
+        if ($entry) {
+            echo ResponseService::response(200, $entry);
+        } else {
+            echo ResponseService::response(404, ["message" => "Entry not found"]);
+        }
     }
 
     public static function getAll() {
         global $connection;
         $entries = EntryService::getAll($connection);
-        echo json_encode($entries);
+        echo ResponseService::response(200, $entries);
     }
 
     public static function getByUser() {
@@ -99,12 +117,13 @@ class EntryController {
         $user_id = intval($_GET['user_id'] ?? 0);
 
         if (!$user_id) {
-            echo json_encode(["error" => "User ID required"]);
+            echo ResponseService::response(400, ["message" => "User ID required"]);
             return;
         }
 
         $entries = EntryService::findByUser($user_id, $connection);
-        echo json_encode($entries);
+        echo ResponseService::response(200, $entries);
     }
+
 }
 ?>

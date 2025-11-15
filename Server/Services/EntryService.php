@@ -13,7 +13,7 @@ class EntryService {
 
     public static function create(array $data, mysqli $connection) {
         $entry = new Entry($data);
-        return $entry->create($data, $connection);
+        return $entry->create($data, $connection); 
     }
 
     public static function update(int $id, array $data, mysqli $connection) {

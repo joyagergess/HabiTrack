@@ -1,4 +1,4 @@
-const base_url = "http://localhost/HabiTrack/Server";
+
 
 
 document.getElementById("login-btn").addEventListener('click', async () => {
@@ -17,7 +17,7 @@ document.getElementById("login-btn").addEventListener('click', async () => {
     let response; 
 
     try {
-        response = await axios.post(base_url + "/auth/login", { email, password });
+        response = await axios.post(`${base_url}/auth/login`, { email, password });
 
         if (response.data.status === 200) {
             loginMessage.style.color = "green";

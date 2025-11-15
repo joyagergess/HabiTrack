@@ -12,7 +12,7 @@ function callAI(string $promptKey, string $userText): ?array {
 }
 
 function sendAIRequest(string $prompt): string {
-    $apiKey = ""; 
+    $apiKey =""; 
 
     $data = [
       'model' => 'gpt-4o-mini',

@@ -6,20 +6,23 @@ class Entry extends model {
 
     private ?int $id = null;
     private int $user_id;
-    private int $steps;
-    private int $caffeine;
-    private string $sleep_time;
-    private float $sleep_hours;
+    private ?int $steps = null;
+    private ?int $caffeine = null;
+    private ?string $sleep_time = null;
+    private ?float $sleep_hours = null;
     private ?string $created_at = null;
+    private string $free_text;
+
+
 
     public function __construct(array $data = []) {
         $this->user_id = $data["user_id"] ?? 0;
-        $this->steps = $data["steps"] ?? 0;
-        $this->caffeine = $data["caffeine"] ?? 0;
-        $this->sleep_time = $data["sleep_time"] ?? "00:00:00";
-        $this->sleep_hours = $data["sleep_hours"] ?? 0.0;
+        $this->steps = $data["steps"] ?? null;
+        $this->caffeine = $data["caffeine"] ?? null;
+        $this->sleep_time = $data["sleep_time"] ?? null;
+        $this->sleep_hours = $data["sleep_hours"] ?? null;
+        $this->free_text = $data["free_text"] ?? "";
 
-      
         if (!empty($data["id"])) $this->id = $data["id"];
         if (!empty($data["created_at"])) $this->created_at = $data["created_at"];
     }
@@ -38,20 +41,22 @@ class Entry extends model {
     public function setSleepTime(string $sleep_time): void { $this->sleep_time = $sleep_time; }
     public function setSleepHours(float $sleep_hours): void { $this->sleep_hours = $sleep_hours; }
 
-    public function toArray(): array {
-        return [
-            "id" => $this->id,
-            "user_id" => $this->user_id,
-            "steps" => $this->steps,
-            "caffeine" => $this->caffeine,
-            "sleep_time" => $this->sleep_time,
-            "sleep_hours" => $this->sleep_hours,
-            "created_at" => $this->created_at
-        ];
-    }
+    public function getFreeText(): string { return $this->free_text; }
+    public function setFreeText(string $free_text): void { $this->free_text = $free_text; }
 
-    public function __toString(): string {
-        return "Entry #{$this->id} | User: {$this->user_id} | Steps: {$this->steps} | Caffeine: {$this->caffeine} | Sleep Time: {$this->sleep_time} | Sleep Hours: {$this->sleep_hours} | Created At: {$this->created_at}";
-    }
+
+    public function toArray(): array {
+    return [
+        "id" => $this->id,
+        "user_id" => $this->user_id,
+        "free_text" => $this->free_text,  
+        "steps" => $this->steps,
+        "caffeine" => $this->caffeine,
+        "sleep_time" => $this->sleep_time,
+        "sleep_hours" => $this->sleep_hours,
+        "created_at" => $this->created_at
+    ];
+}
+
 }
 ?>

@@ -33,5 +33,16 @@ class HabitService {
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+    
+    public static function toggleStatus(int $id, mysqli $connection) {
+        $habit = self::findHabitById($id, $connection);
+        if (!$habit) return false;
+        $newStatus = $habit['status'] == 1 ? 0 : 1;
+    
+        $habitModel = new habit([]);
+        return $habitModel->update(['status' => $newStatus], 'id', $id, $connection);
+    }
 }
+
+
 ?>
