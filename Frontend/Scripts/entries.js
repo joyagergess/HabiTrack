@@ -1,57 +1,48 @@
-const entryListContainer = document.getElementById("entriesList");
-const entryPopup = document.getElementById("entryPopup");
-const entryTextInput = document.getElementById("entryText");
-const saveEntryBtn = document.getElementById("saveEntryBtn");
-const closeEntryBtn = document.getElementById("closeEntryPopup");
+document.addEventListener("DOMContentLoaded", () => {
+    const entryListContainer = document.getElementById("entriesList");
+    const entryPopup = document.getElementById("entryPopup");
+    const entryTextInput = document.getElementById("entryText");
+    const saveEntryBtn = document.getElementById("saveEntryBtn");
+    const closeEntryBtn = document.getElementById("closeEntryPopup");
+    const addEntryBtn = document.getElementById("addEntryBtn");
 
-let editingEntryId = null;
+    let editingEntryId = null;
 
-document.addEventListener("DOMContentLoaded", loadEntries);
+    addEntryBtn.addEventListener("click", () => {
+        editingEntryId = null;
+        entryTextInput.value = "";
+        entryPopup.classList.remove("hidden");
+    });
 
-document.getElementById("addEntryBtn").addEventListener("click", () => {
-    editingEntryId = null;
-    entryTextInput.value = "";
-    entryPopup.classList.remove("hidden");
-});
+    closeEntryBtn.addEventListener("click", () => entryPopup.classList.add("hidden"));
+
+    saveEntryBtn.addEventListener("click", async () => {
+        const text = entryTextInput.value.trim();
+        const userId = localStorage.getItem("userId");
+
+        if (!userId) return alert("User not logged in");
+        if (!text) return alert("Entry cannot be empty");
+
+        try {
+           const payload = { 
+            user_id: parseInt(userId), 
+            free_text: text   
+          };
 
 
-closeEntryBtn.addEventListener("click", () => {
-    entryPopup.classList.add("hidden");
-});
+            if (editingEntryId) {
+                await axios.put(`${base_url}/entry/update?id=${editingEntryId}`, payload);
+            } else {
+                await axios.post(`${base_url}/entry/create`, payload);
+            }
 
-saveEntryBtn.addEventListener("click", async () => {
-    const free_text = entryTextInput.value.trim();
-    const userId = localStorage.getItem("userId");
-
-    if (!userId) {
-        alert("User not logged in");
-        return;
-    }
-
-    if (!free_text) {
-        alert("Entry cannot be empty");
-        return;
-    }
-
-    try {
-        if (editingEntryId) {
-            await axios.put(`${base_url}/entry/update?id=${editingEntryId}`, { free_text });
-        } else {
-            await axios.post(`${base_url}/entry/create`, { 
-                user_id: parseInt(userId), 
-                free_text 
-            });
+            entryPopup.classList.add("hidden");
+            loadEntries();
+        } catch (error) {
+            console.error(error);
+            alert("Error saving entry. Check console.");
         }
-
-        entryPopup.classList.add("hidden");
-        loadEntries();
-    } catch (error) {
-        console.error(error);
-        alert("Error saving entry. Check console.");
-    }
-});
-
-
+    });
 async function loadEntries() {
     const userId = localStorage.getItem("userId");
     entryListContainer.innerHTML = "";
@@ -79,6 +70,18 @@ async function loadEntries() {
             card.className = "entry-card";
             card.setAttribute("data-id", entry.id);
 
+      
+            const dateDiv = document.createElement("div");
+            dateDiv.className = "entry-date";
+            const formattedDate = new Date(entry.created_at).toLocaleString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+            dateDiv.textContent = `🗓️ ${formattedDate}`;
+
             const textDiv = document.createElement("div");
             textDiv.className = "entry-text";
             textDiv.textContent = entry.free_text;
@@ -95,10 +98,12 @@ async function loadEntries() {
             deleteBtn.addEventListener("click", () => deleteEntry(entry.id));
 
             actions.append(editBtn, deleteBtn);
-            card.append(textDiv, actions);
+
+     
+            card.append(dateDiv, textDiv, actions);
+
             entryListContainer.appendChild(card);
         });
-
     } catch (error) {
         console.error("Axios error:", error);
         entryListContainer.textContent = "Network error. Please check the server.";
@@ -106,21 +111,21 @@ async function loadEntries() {
 }
 
 
-function editEntry(entry) {
-    editingEntryId = entry.id;
-    entryTextInput.value = entry.free_text;
-    entryPopup.classList.remove("hidden");
-}
-
-
-async function deleteEntry(id) {
-    if (!confirm("Are you sure you want to delete this entry?")) return;
-
-    try {
-        await axios.delete(`${base_url}/entry/delete?id=${id}`);
-        loadEntries();
-    } catch (error) {
-        console.error(error);
-        alert("Failed to delete entry.");
+    function editEntry(entry) {
+        editingEntryId = entry.id;
+        entryTextInput.value = entry.free_text;
+        entryPopup.classList.remove("hidden");
     }
-}
+
+    async function deleteEntry(id) {
+        if (!confirm("Are you sure you want to delete this entry?")) return;
+        try {
+            await axios.delete(`${base_url}/entry/delete?id=${id}`);
+            loadEntries();
+        } catch (error) {
+            console.error(error);
+            alert("Failed to delete entry.");
+        }
+    }
+    loadEntries();
+});
