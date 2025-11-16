@@ -1,4 +1,3 @@
-// Scripts/weeklySummary.js
 
 document.addEventListener("DOMContentLoaded", () => {
 

@@ -27,5 +27,6 @@ $apis = [
     '/auth/login'  => ['controller' => 'AuthController', 'method' => 'login', 'type' => 'POST'],
     
     '/summary/weekly' => ['controller' => 'SummaryController', 'method' => 'weeklySummary', 'type' => 'POST'],
+    '/AICalories' => ['controller' => 'caloriesController', 'method' => 'calculateCalories', 'type' => 'POST'],
 
 ];

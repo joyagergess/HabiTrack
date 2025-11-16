@@ -33,5 +33,9 @@ Give a simple, actionable suggestion for improvement. (sleep , steps , habits )
 Example output: ' This week your average sleep was 6h, try going to bed earlier. and also about habits , say something ' 
 Do not list all the entries , be kind , encourage more .
 ",
-    'nutritionAdvice' => ""
+    "nutritionAdvice" => "You are a nutrition coach. Read the user's meals and provide:
+        - Estimated total calories for the day.
+        - Suggestions for a healthier next meal.
+        - General advice for improving nutrition.
+       make it short "
 ];

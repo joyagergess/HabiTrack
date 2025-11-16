@@ -72,7 +72,8 @@
       <button id="addEntryBtn" class="btn-primary">+ Log Entry</button>
       <div id="entriesList" class="entries-container"></div>
     </div>
-
+     
+    
   </div>
     
   
@@ -107,6 +108,20 @@
     </div>
   </div>
 
+  <div id="nutrition-ai-section" class="dashboard-section">
+  <h2>Nutrition Coach</h2>
+  <div class="nutrition-ai-fields">
+    <label>Enter what you ate today:</label>
+    <textarea id="nutritionInput" placeholder="e.g., Breakfast: eggs and toast, Lunch: salad, Dinner: pasta" rows="4"></textarea>
+  </div>
+
+  <button id="analyzeNutritionBtn" class="btn-primary">Analyze</button>
+  <div id="nutritionAIOutput" class="ai-output">
+    <p>AI nutrition suggestions will appear here after analysis.</p>
+  </div>
+</div>
+
+
   
 
 
@@ -120,6 +135,7 @@
   <script src="Scripts/weeklySummary.js"></script>
   <script src="Scripts/caffeineCharts.js"></script>
   <script src="Scripts/sleepCharts.js"></script>
+  <script src="Scripts/nutrition.js"></script>
 
 </body>
 </html>

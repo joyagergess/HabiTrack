@@ -20,7 +20,7 @@ class AISummary {
         return $summary ?: "Failed to generate summary. Here are your raw entries: " . $userText;
     }
 
-    private static function sendAIRequest(string $prompt): string {
+    public static function sendAIRequest(string $prompt): string {
         $apiKey ="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"; 
 
         $data = [
@@ -45,7 +45,7 @@ class AISummary {
         return $response;
     }
 
-    private static function parseAIResponse(string $response): ?string {
+    public static function parseAIResponse(string $response): ?string {
         $responseData = json_decode($response, true);
         return $responseData['choices'][0]['message']['content'] ?? null;
     }
