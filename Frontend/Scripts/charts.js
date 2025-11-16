@@ -15,7 +15,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const entries = response.data.data;
 
-        const labels = entries.map(e => new Date(e.created_at).toLocaleDateString());
+        const labels = entries.map(e => {
+    const date = new Date(e.created_at);
+    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); 
+});
+
+        
         const stepsData = entries.map(e => e.steps || 0);
 
         new Chart(ctx, {

@@ -13,10 +13,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const entries = response.data.data;
 
-        // Only include entries with sleep_hours
         const filteredEntries = entries.filter(e => e.sleep_hours != null);
 
-        const labels = filteredEntries.map(e => new Date(e.created_at).toLocaleDateString());
+        const labels = entries.map(e => {
+            const date = new Date(e.created_at);
+            return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); 
+        });
         const sleepData = filteredEntries.map(e => parseFloat(e.sleep_hours));
 
         new Chart(ctx, {

@@ -95,14 +95,17 @@ async function loadHabits() {
 
             const toggleBtn = document.createElement("button");
             toggleBtn.textContent = habit.status === 1 ? "Deactivate" : "Activate";
+            toggleBtn.classList.add("btn-primary"); 
             toggleBtn.addEventListener("click", () => toggleStatus(habit.id));
 
             const editBtn = document.createElement("button");
             editBtn.textContent = "Edit";
+            editBtn.classList.add("btn-primary");
             editBtn.addEventListener("click", () => editHabit(habit));
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
+            deleteBtn.classList.add("btn-primary");  
             deleteBtn.addEventListener("click", () => deleteHabit(habit.id));
 
             actions.append(toggleBtn, editBtn, deleteBtn);

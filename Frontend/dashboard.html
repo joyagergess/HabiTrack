@@ -19,15 +19,32 @@
 
   <div class="dashboard-sections-container">
 
-    <div id="habits-section" class="dashboard-section">
-      <h2>Your Habits</h2>
-      <button id="addHabitBtn" class="btn-primary">+ Add Habit</button>
-      <div id="habitsList" class="habits-container"></div>
+    
+   <div id="sleep-chart-section" class="dashboard-section">
+      <h2>Sleep Progress</h2>
+      <canvas id="myChartSleep" height="400"></canvas>
+    </div>
+    
+    <div id="steps-chart-section" class="dashboard-section">
+      <h2>Steps Progress</h2>
+      <canvas id="myChart" height="400"></canvas>
     </div>
 
 
-  
-    <div id="quick-log-section" class="dashboard-section">
+    <div id="caffeine-chart-section" class="dashboard-section">
+      <h2>Caffeine Intake</h2>
+      <canvas id="myChartCaffeine" height="400"></canvas>
+    </div>
+
+    
+     <div id="weekly-summary" class="dashboard-section">
+    <h2>Weekly Summary</h2>
+    <div id="summaryContent">
+    <p>No summary yet. Add some entries!</p>
+    </div>
+    </div>
+    
+  <div id="quick-log-section" class="dashboard-section">
       <h2>Quick Log</h2>
       <div class="quick-log-fields">
         <label>Steps</label>
@@ -44,38 +61,40 @@
       </div>
       <button id="quickSaveBtn" class="btn-primary">Save Quick Log</button>
     </div>
-
-    <div id="caffeine-chart-section" class="dashboard-section">
-      <h2>Caffeine Intake</h2>
-      <canvas id="myChartCaffeine" height="400"></canvas>
-    </div>
-    
-    <div id="sleep-chart-section" class="dashboard-section">
-      <h2>Sleep Progress</h2>
-      <canvas id="myChartSleep" height="400"></canvas>
-    </div>
-    
-    <div id="steps-chart-section" class="dashboard-section">
-      <h2>Steps Progress</h2>
-      <canvas id="myChart" height="400"></canvas>
-    </div>
-
-    <div id="weekly-summary" class="dashboard-section">
-    <h2>Weekly Summary</h2>
-    <div id="summaryContent">
-    <p>No summary yet. Add some entries!</p>
-    </div>
-    </div>
-
-    <div id="entries-section" class="dashboard-section">
-      <h2>Daily Logs</h2>
-      <button id="addEntryBtn" class="btn-primary">+ Log Entry</button>
-      <div id="entriesList" class="entries-container"></div>
-    </div>
-     
-    
+   
+  
+  <div id="nutrition-ai-section" class="dashboard-section">
+  <h2>Nutrition Coach</h2>
+  <div class="nutrition-ai-fields">
+    <label>Enter what you ate today:</label>
+    <textarea id="nutritionInput" placeholder="e.g., Breakfast: eggs and toast, Lunch: salad, Dinner: pasta" rows="4"></textarea>
   </div>
-    
+  
+  <button id="analyzeNutritionBtn" class="btn-primary">Analyze</button>
+  <div id="nutritionAIOutput" class="ai-output">
+    <p>AI nutrition suggestions will appear here after analysis.</p>
+  </div>
+</div>
+   
+     
+  </div>
+  <div class="wide-row">
+  
+  <div id="habits-section" class="dashboard-section equal-card">
+    <h2>Your Habits</h2>
+    <button id="addHabitBtn" class="btn-primary">+ Add Habit</button>
+    <div id="habitsList" class="habits-container"></div>
+  </div>
+
+  <div id="entries-section" class="dashboard-section equal-card">
+    <h2>Daily Logs</h2>
+    <button id="addEntryBtn" class="btn-primary">+ Log your day</button>
+    <div id="entriesList" class="entries-container"></div>
+  </div>
+
+</div>
+
+
   
 
   <div id="habitPopup" class="popup hidden">
@@ -108,21 +127,7 @@
     </div>
   </div>
 
-  <div id="nutrition-ai-section" class="dashboard-section">
-  <h2>Nutrition Coach</h2>
-  <div class="nutrition-ai-fields">
-    <label>Enter what you ate today:</label>
-    <textarea id="nutritionInput" placeholder="e.g., Breakfast: eggs and toast, Lunch: salad, Dinner: pasta" rows="4"></textarea>
-  </div>
 
-  <button id="analyzeNutritionBtn" class="btn-primary">Analyze</button>
-  <div id="nutritionAIOutput" class="ai-output">
-    <p>AI nutrition suggestions will appear here after analysis.</p>
-  </div>
-</div>
-
-
-  
 
 
   <script src="Scripts/config.js"></script>

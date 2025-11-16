@@ -93,10 +93,12 @@ async function loadEntries() {
 
             const editBtn = document.createElement("button");
             editBtn.textContent = "Edit";
+            editBtn.classList.add("btn-primary");  
             editBtn.addEventListener("click", () => editEntry(entry));
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
+            deleteBtn.classList.add("btn-primary");  
             deleteBtn.addEventListener("click", () => deleteEntry(entry.id));
 
             actions.append(editBtn, deleteBtn);

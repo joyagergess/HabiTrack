@@ -227,29 +227,29 @@ p {
 }
 
 
-/* Dashboard */
+
 .dashboard-sections-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  width: 90%;
-  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 40px;
+  padding: 50px;
 }
+.dashboard-section {
+  width: 100%; 
+}
+
 
 .dashboard-section {
-  flex: initial;  
-  min-width: 280px;
-  max-width: 400px;
-  padding: 20px 15px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
   background: #fff;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 90%;
 }
-
+.dashboard-section canvas {
+  width: 100% !important;   
+  height: 330px !important; 
+}
 .dashboard-section h2 {
   font-size: 20px;
   margin-bottom: 15px;
@@ -307,11 +307,11 @@ p {
 .quick-log-fields {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
 }
-.quick-log-fields label { font-weight: bold; font-size: 14px; }
-.quick-log-fields input { padding: 6px 8px; border-radius: 5px; border: 1px solid #ddd; width: 100%; }
-
+.quick-log-fields label { font-weight: bold; font-size: 16px; }
+.quick-log-fields input { padding: 6px 8px; border-radius: 5px; border: 1px solid #ddd; width: 60%; }
 
 .popup {
   position: fixed;
@@ -339,13 +339,6 @@ p {
   border-radius: 5px; border: 1px solid #ddd;
 }
 
-#entries-section {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  max-width: 900px;
-  margin: 20px auto;
-}
 
 @media (max-width: 800px) {
   .dashboard-sections-container {
@@ -378,4 +371,85 @@ p {
   font-size: 14px;
   color: #555;
   line-height: 1.5;
+}
+#quick-log-section h2 {
+  text-align: center;
+}
+
+#quickSaveBtn {
+  display: block;
+  margin: 15px auto 0 auto; 
+}
+
+
+#nutrition-ai-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#nutritionInput {
+  width: 70%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 14px;
+}
+
+#analyzeNutritionBtn {
+  display: block;
+  margin: 15px auto 0 auto;
+}
+#nutritionAIOutput {
+  max-height: 150px;       
+  overflow-y: auto;        
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+#habitsList {
+  max-height: 400px;    
+  overflow-y: auto;    
+  padding-right: 5px;   
+}
+
+#entriesList {
+  max-height: 400px;    
+  overflow-y: auto;     
+  padding-right: 5px;
+}
+.wide-row {
+  display: flex;
+  gap: 20px;          
+  margin: 0 50px;     
+}
+
+.equal-card {
+  flex: 1;              
+  max-height: 400px;    
+  overflow-y: auto;    
+  display: flex;
+  flex-direction: column;
+  padding: 15px;       
+}
+
+.equal-card h2,
+.equal-card button {
+  flex-shrink: 0;       
+}
+
+
+.equal-card h2,
+.equal-card button {
+  flex-shrink: 0; 
+}
+
+#addHabitBtn,
+#addEntryBtn {
+  width: 150px;     
+  display: inline-block;
 }
