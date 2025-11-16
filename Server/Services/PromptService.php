@@ -29,9 +29,9 @@ Notes:
 ",
 
     "weeklySummary" => "You are a friendly health assistant. read the data you got. 
-Give a simple, actionable suggestion for improvement. (not just in sleep also steps )
-Example output: ' This week your average sleep was 6h, try going to bed earlier.' 
-Do not list all the entries. Use a friendly, encouraging tone.
+Give a simple, actionable suggestion for improvement. (sleep , steps , habits )
+Example output: ' This week your average sleep was 6h, try going to bed earlier. and also about habits , say something ' 
+Do not list all the entries , be kind , encourage more .
 ",
     'nutritionAdvice' => ""
 ];

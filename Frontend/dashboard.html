@@ -25,14 +25,8 @@
       <div id="habitsList" class="habits-container"></div>
     </div>
 
-    <div id="chart-section" class="dashboard-section">
-      <h2>Progress Chart</h2>
-      <div style="width: 100%; max-width: 400px; margin: auto;">
-        <canvas id="myChart" height="400"></canvas>
-      </div>
-    </div>
 
-
+  
     <div id="quick-log-section" class="dashboard-section">
       <h2>Quick Log</h2>
       <div class="quick-log-fields">
@@ -51,6 +45,27 @@
       <button id="quickSaveBtn" class="btn-primary">Save Quick Log</button>
     </div>
 
+    <div id="caffeine-chart-section" class="dashboard-section">
+      <h2>Caffeine Intake</h2>
+      <canvas id="myChartCaffeine" height="400"></canvas>
+    </div>
+    
+    <div id="sleep-chart-section" class="dashboard-section">
+      <h2>Sleep Progress</h2>
+      <canvas id="myChartSleep" height="400"></canvas>
+    </div>
+    
+    <div id="steps-chart-section" class="dashboard-section">
+      <h2>Steps Progress</h2>
+      <canvas id="myChart" height="400"></canvas>
+    </div>
+
+    <div id="weekly-summary" class="dashboard-section">
+    <h2>Weekly Summary</h2>
+    <div id="summaryContent">
+    <p>No summary yet. Add some entries!</p>
+    </div>
+    </div>
 
     <div id="entries-section" class="dashboard-section">
       <h2>Daily Logs</h2>
@@ -59,7 +74,8 @@
     </div>
 
   </div>
-
+    
+  
 
   <div id="habitPopup" class="popup hidden">
     <div class="popup-content">
@@ -91,12 +107,7 @@
     </div>
   </div>
 
-  <div id="weekly-summary" class="dashboard-section">
-  <h2>Weekly Summary</h2>
-  <div id="summaryContent">
-    <p>No summary yet. Add some entries!</p>
-  </div>
-</div>
+  
 
 
   <script src="Scripts/config.js"></script>
@@ -107,6 +118,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="Scripts/charts.js"></script>
   <script src="Scripts/weeklySummary.js"></script>
+  <script src="Scripts/caffeineCharts.js"></script>
+  <script src="Scripts/sleepCharts.js"></script>
 
 </body>
 </html>
