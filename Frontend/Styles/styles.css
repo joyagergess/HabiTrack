@@ -477,3 +477,36 @@ p {
     resize: vertical;  
     font-size: 14px;
 }
+.footer {
+  background: linear-gradient(to right, #5085ff, #66e3ff);
+  color: #eee;
+  padding: 8px 10px;
+  margin-top: 20px;
+}
+
+.footer-content {
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+}
+
+.footer h3 {
+  margin-bottom: 6px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.footer p {
+  text-align: center;  
+  line-height: 1.4;
+  font-size: 13px;
+  max-width: 700px;
+  margin: 0 auto 6px auto;
+}
+
+.footer-info  {
+  text-align: center;    
+  margin: 2px 0;
+  color: #eee;
+}
+
