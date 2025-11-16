@@ -15,6 +15,14 @@ h1, h2, h3 {
 p {
   margin-bottom: 20px;
 }
+.step img {
+  width: 400px;      
+  height: 350px;   
+  object-fit: contain; 
+  background-color: white;
+
+  border-radius: 8px; 
+}
 
 
 .navbar {
@@ -95,7 +103,7 @@ p {
   max-width: 300px;
 }
 .step img {
-  width: 80px;
+  width: 300px;
   margin-bottom: 20px;
 }
 .features {
@@ -361,6 +369,7 @@ p {
   color: #777;
   margin-bottom: 5px;
 }
+
 #weekly-summary {
   flex: 1;
   min-width: 300px;
@@ -452,4 +461,19 @@ p {
 #addEntryBtn {
   width: 150px;     
   display: inline-block;
+}
+
+#entryPopup h3 {
+    color: #50aaff; 
+    text-align: center; 
+}
+
+#entryPopup textarea {
+    width: 90%;       
+    height: 120px;   
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;  
+    font-size: 14px;
 }
