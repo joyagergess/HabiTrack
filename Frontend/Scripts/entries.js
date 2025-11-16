@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
            const payload = { 
             user_id: parseInt(userId), 
-            free_text: text   
+            text: text   
           };
 
 
@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Error saving entry. Check console.");
         }
     });
+
+    
 async function loadEntries() {
     const userId = localStorage.getItem("userId");
     entryListContainer.innerHTML = "";
@@ -128,4 +130,5 @@ async function loadEntries() {
         }
     }
     loadEntries();
+    
 });

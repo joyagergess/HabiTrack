@@ -18,35 +18,47 @@
   </nav>
 
   <div class="dashboard-sections-container">
-    <section id="habits-section" class="dashboard-section">
+
+    <div id="habits-section" class="dashboard-section">
       <h2>Your Habits</h2>
       <button id="addHabitBtn" class="btn-primary">+ Add Habit</button>
       <div id="habitsList" class="habits-container"></div>
-    </section>
+    </div>
 
-    <section id="quick-log-section" class="dashboard-section">
-  <h2>Quick Log</h2>
-  <div class="quick-log-fields">
-    <label>Steps</label>
-    <input type="number" id="quickSteps" placeholder="e.g., 8000">
+    <div id="chart-section" class="dashboard-section">
+      <h2>Progress Chart</h2>
+      <div style="width: 100%; max-width: 400px; margin: auto;">
+        <canvas id="myChart" height="400"></canvas>
+      </div>
+    </div>
 
-    <label>Caffeine (cups)</label>
-    <input type="number" id="quickCaffeine" placeholder="e.g., 2">
 
-    <label>Slept at</label>
-    <input type="time" id="quickSleepStart">
+    <div id="quick-log-section" class="dashboard-section">
+      <h2>Quick Log</h2>
+      <div class="quick-log-fields">
+        <label>Steps</label>
+        <input type="number" id="quickSteps" placeholder="e.g., 8000">
 
-    <label>Woke up at</label>
-    <input type="time" id="quickSleepEnd">
+        <label>Caffeine (cups)</label>
+        <input type="number" id="quickCaffeine" placeholder="e.g., 2">
+
+        <label>Slept at</label>
+        <input type="time" id="quickSleepStart">
+
+        <label>Woke up at</label>
+        <input type="time" id="quickSleepEnd">
+      </div>
+      <button id="quickSaveBtn" class="btn-primary">Save Quick Log</button>
+    </div>
+
+
+    <div id="entries-section" class="dashboard-section">
+      <h2>Daily Logs</h2>
+      <button id="addEntryBtn" class="btn-primary">+ Log Entry</button>
+      <div id="entriesList" class="entries-container"></div>
+    </div>
+
   </div>
-  <button id="quickSaveBtn" class="btn-primary">Save Quick Log</button>
-</section>
-
-<section id="entries-section" class="dashboard-section">
-    <h2>Daily Logs</h2>
-    <button id="addEntryBtn" class="btn-primary">+ Log Entry</button>
-    <div id="entriesList" class="entries-container"></div>
-</section>
 
 
   <div id="habitPopup" class="popup hidden">
@@ -79,13 +91,22 @@
     </div>
   </div>
 
- <script src="Scripts/config.js"></script>
+  <div id="weekly-summary" class="dashboard-section">
+  <h2>Weekly Summary</h2>
+  <div id="summaryContent">
+    <p>No summary yet. Add some entries!</p>
+  </div>
+</div>
+
+
+  <script src="Scripts/config.js"></script>
   <script src="Scripts/axios.min.js"></script>
   <script src="Scripts/habits.js"></script>
   <script src="Scripts/entries.js"></script>
-   <script src="Scripts/quickLog.js"></script>
-
-
+  <script src="Scripts/quickLog.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="Scripts/charts.js"></script>
+  <script src="Scripts/weeklySummary.js"></script>
 
 </body>
 </html>

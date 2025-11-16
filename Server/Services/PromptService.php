@@ -27,6 +27,11 @@ Notes:
 - All numbers should be decimals where appropriate.
 - Do not include any text outside the JSON.
 ",
-    'weeklySummary' => "",
+
+    "weeklySummary" => "You are a friendly health assistant. read the data you got. 
+Give a simple, actionable suggestion for improvement. (not just in sleep also steps )
+Example output: ' This week your average sleep was 6h, try going to bed earlier.' 
+Do not list all the entries. Use a friendly, encouraging tone.
+",
     'nutritionAdvice' => ""
 ];

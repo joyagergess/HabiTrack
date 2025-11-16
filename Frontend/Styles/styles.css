@@ -227,7 +227,6 @@ p {
 }
 
 
-
 /* Dashboard */
 .dashboard-sections-container {
   display: flex;
@@ -239,7 +238,7 @@ p {
 }
 
 .dashboard-section {
-   flex: initial;  
+  flex: initial;  
   min-width: 280px;
   max-width: 400px;
   padding: 20px 15px;
@@ -355,16 +354,28 @@ p {
   }
   .dashboard-section { max-width: 90%; }
 }
+
 .entry-card {
-    padding: 12px;
-    background: #f8f8f8;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 12px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .entry-date {
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 5px;
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 5px;
+}
+#weekly-summary {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+#summaryContent {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
 }

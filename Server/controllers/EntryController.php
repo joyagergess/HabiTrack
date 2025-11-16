@@ -39,39 +39,40 @@ class EntryController {
         }
     }
 
-    
     public static function update() {
-        global $connection;
-        $id = intval($_GET['id'] ?? 0);
-        $data = json_decode(file_get_contents("php://input"), true);
-    
-        if (!$id) {
-            echo ResponseService::response(400, ["message" => "ID required"]);
-            return;
-        }
-    
-        if (empty($data['free_text'])) {
-            echo ResponseService::response(400, ["message" => "No entry text provided"]);
-            return;
-        }
+    global $connection;
+    $id = intval($_GET['id'] ?? 0);
+    $data = json_decode(file_get_contents("php://input"), true);
 
-        $parsedData = callAI('parseEntry', $data['free_text']);
-        if (!$parsedData) {
-            echo ResponseService::response(500, ["message" => "Failed to parse entry"]);
-            return;
-        }
-    
-        $data['steps'] = $parsedData['steps'] ?? null;
-        $data['caffeine'] = $parsedData['caffeine'] ?? null;
-        $data['sleep_time'] = $parsedData['sleep_time'] ?? null;
-        $data['sleep_hours'] = $parsedData['sleep_hours'] ?? null;
-    
-        if (EntryService::update($id, $data, $connection)) {
-            echo ResponseService::response(200, ["message" => "Entry updated successfully"]);
-        } else {
-            echo ResponseService::response(500, ["message" => "Failed to update entry"]);
-        }
+    if (!$id) {
+        echo ResponseService::response(400, ["message" => "ID required"]);
+        return;
     }
+
+    if (empty($data['text'])) {
+        echo ResponseService::response(400, ["message" => "No entry text provided"]);
+        return;
+    }
+    $parsedData = callAI('parseEntry', $data['text']);
+    if (!$parsedData) {
+        echo ResponseService::response(500, ["message" => "Failed to parse entry"]);
+        return;
+    }
+
+    $updateData = [
+        "free_text"   => $data["text"],
+        "steps"       => $parsedData["steps"] ?? null,
+        "caffeine"    => $parsedData["caffeine"] ?? null,
+        "sleep_time"  => $parsedData["sleep_time"] ?? null,
+        "sleep_hours" => $parsedData["sleep_hours"] ?? null,
+    ];
+
+    if (EntryService::update($id, $updateData, $connection)) {
+        echo ResponseService::response(200, ["message" => "Entry updated successfully"]);
+    } else {
+        echo ResponseService::response(500, ["message" => "Failed to update entry"]);
+    }
+}
 
     public static function delete() {
         global $connection;
