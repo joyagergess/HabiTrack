@@ -6,9 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sleepEndInput.addEventListener("change", () => {
         if (sleepStartInput.value && sleepEndInput.value) {
             const start = sleepStartInput.value;
-            const end = sleepEndInput.value;
-
-           
+            const end = sleepEndInput.value; 
         }
     });
 

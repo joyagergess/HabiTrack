@@ -15,6 +15,23 @@ body { background-color: #f4f6fc; color: #333; }
 
 .navbar .logo { font-size: 1.5rem; font-weight: bold; }
 
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #50cbff;
+}
 .btn-primary {
   padding: 8px 20px;
   background-color: white;
@@ -75,5 +92,97 @@ td button {
   margin-right: 5px;
 }
 td .deactivateBtn { background-color: #ff8c00; color: white; }
-td .deleteHabitBtn , td .deleteUserBtn { background-color: #ff4d4d; color: white; }
+td .deleteHabitBtn , td .deleteUserBtn ,td .deleteEntryBtn{
+   background-color: #ff4d4d; 
+   color: white;
+   }
+
 td button:hover { opacity: 0.85; }
+
+.users-section {
+  width: 80%;       
+  max-width: 1100px;
+  margin: 20px auto; 
+}
+
+.entries-section {
+  width: 80%;
+  max-width: 1100px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#entriesTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#entriesTable thead {
+  background-color: #f0f8ff;
+  color: #50aaff;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+#entriesTable tbody {
+  display: block;
+  max-height: 300px; 
+  overflow-y: auto;  
+}
+
+#entriesTable tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+#entriesTable th,
+#entriesTable td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.stats-section {
+  width: 50%; 
+  max-width: 600px;
+  margin: 20px auto; 
+  background: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.stats-section h2 {
+  margin-bottom: 15px;
+  color: #50aaff;
+  font-size: 1.2rem;
+}
+
+.stats-section canvas {
+  width: 100% ;
+  height: 300px ;
+}
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;    
+}
+.stats-section {
+  flex: 1;            
+  min-width: 300px;   
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.stats-section canvas {
+  width: 100% ;
+  height: 300px;  
+}

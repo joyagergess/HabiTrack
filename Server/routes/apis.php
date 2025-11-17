@@ -17,6 +17,7 @@ $apis = [
     '/habit/toggleStatus' => ['controller' => 'HabitController', 'method' => 'toggleStatus', 'type' => 'PUT'],
     '/habits/user' => ['controller' => 'HabitController', 'method' => 'getByUser', 'type' => 'GET'],
 
+    '/entries/All'     => ['controller' => 'EntryController', 'method' => 'getAll', 'type' => 'GET'],
     '/entries'         => ['controller' => 'EntryController', 'method' => 'getByUser', 'type' => 'GET'],
     '/entry'           => ['controller' => 'EntryController', 'method' => 'getOne', 'type' => 'GET'],
     '/entry/create'    => ['controller' => 'EntryController', 'method' => 'create', 'type' => 'POST'],

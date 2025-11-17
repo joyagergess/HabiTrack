@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const entries = response.data.data;
-
+       console.log(entries);
         const labels = entries.map(e => {
         const date = new Date(e.created_at);
         return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); 

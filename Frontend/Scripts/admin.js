@@ -112,3 +112,71 @@ async function deleteHabit(id) {
     }
 }
 
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        const response = await axios.get(`${base_url}/entries/All`);
+        const entries = response.data.data;
+
+        const tbody = document.querySelector("#entriesTable tbody");
+        tbody.innerHTML = "";
+
+        entries.forEach(entry => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${entry.id}</td>
+                <td>${entry.user_id}</td>
+                <td>${entry.free_text}</td>
+                <td>${entry.steps}</td>
+                <td>${entry.caffeine}</td>
+                <td>${entry.sleep_time}</td>
+                <td>${entry.sleep_hours}</td>
+                <td>${entry.created_at}</td>
+                <td>
+                    <button class="deleteEntryBtn" id="${entry.id}">Delete</button>
+                </td>
+            `;
+
+            tbody.appendChild(row);
+        });
+
+        handleDeleteButtonsEntry();
+
+    } catch (error) {
+        console.error("Error fetching entries:", error);
+    }
+});
+
+
+function handleDeleteButtonsEntry() {
+    document.querySelectorAll(".deleteEntryBtn").forEach(btn => {
+        btn.addEventListener("click", async e => {
+            const id = e.target.id;
+
+            if (!confirm("Are you sure you want to delete this entry?")) return;
+
+            deleteEntry(id);
+        });
+    });
+}
+
+
+async function deleteEntry(id) {
+    try {
+        await axios.delete(`${base_url}/entry/delete?id=${id}`);
+
+        alert("Entry deleted");
+        location.reload();
+
+    } catch (error) {
+        console.error("Delete entry failed:", error);
+        alert("Failed to delete entry.");
+    }
+}
+
+ const role = localStorage.getItem("role");
+    if (!role || role.toLowerCase() !== "admin") {
+        window.location.href = "index.html";
+    }

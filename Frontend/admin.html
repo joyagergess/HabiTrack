@@ -12,9 +12,11 @@
   
   <nav class="navbar">
     <div class="logo">HabiTrack Admin</div>
-    <button id="logoutBtn" class="btn-primary">Logout</button>
+      <ul class="nav-links">
+      <li><a href="login.html" id="logout">Logout</a></li>
+    </ul>  
   </nav>
-
+  
     <section class="users-section">
       <h2>User Management</h2>
       <input type="text" id="searchUser" placeholder="Search users..." />
@@ -55,11 +57,49 @@
         </tbody>
       </table>
     </section>
+
+
+  <section class="entries-section">
+  <h2>Entries Management</h2>
+  <table id="entriesTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Free Text</th>
+        <th>Steps</th>
+        <th>Caffeine</th>
+        <th>Sleep Time</th>
+        <th>Sleep Hours</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+  </section>
   
+<section class="stats-container">
+  <div class="stats-section">
+    <h2>User Activity (Steps)</h2>
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <div class="stats-section">
+    <h2>Active Habits per User</h2>
+    <canvas id="activeHabitsChart"></canvas>
+  </div>
+</section>
+
 
   <script src="Scripts/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="Scripts/config.js"></script>
   <script src="Scripts/admin.js"></script>
+  <script src="Scripts/logout.js"></script>
+  <script src="Scripts/chartsAdmin.js"></script>
+
 </body>
 </html>

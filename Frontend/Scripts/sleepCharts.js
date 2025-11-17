@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.log("No entries found or error fetching entries");
             return;
         }
-
         const entries = response.data.data;
 
         const filteredEntries = entries.filter(e => e.sleep_hours != null);
