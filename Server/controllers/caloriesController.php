@@ -10,15 +10,15 @@ class caloriesController {
 
     public static function calculateCalories() {
         global $connection;
-$data = json_decode(file_get_contents("php://input"), true);
-$userId = intval($data["user_id"] ?? 0);
-$foodLog = trim($data["food_log"] ?? '');
+        $data = json_decode(file_get_contents("php://input"), true);
+        $userId = intval($data["user_id"] ?? 0);
+        $foodLog = trim($data["food_log"] ?? '');
 
-if (!$userId || !$foodLog) {
-    echo ResponseService::response(400, ["message" => "User ID and food log required"]);
-    return;
-}
-
-$caloriesSummary = CaloriesService::generateCaloriesFromText($foodLog);
-echo ResponseService::response(200, ["summary" => $caloriesSummary]);
-    }}
+        if (!$userId || !$foodLog) {
+            echo ResponseService::response(400, ["message" => "User ID and food log required"]);
+            return;
+        }
+        
+        $caloriesSummary = CaloriesService::generateCaloriesFromText($foodLog);
+        echo ResponseService::response(200, ["summary" => $caloriesSummary]);
+            }}

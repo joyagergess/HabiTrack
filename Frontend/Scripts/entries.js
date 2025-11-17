@@ -28,8 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
             user_id: parseInt(userId), 
             text: text   
           };
-
-
             if (editingEntryId) {
                 await axios.put(`${base_url}/entry/update?id=${editingEntryId}`, payload);
             } else {
@@ -37,7 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             entryPopup.classList.add("hidden");
+       
+
             loadEntries();
+            
         } catch (error) {
             console.error(error);
             alert("Error saving entry. Check console.");

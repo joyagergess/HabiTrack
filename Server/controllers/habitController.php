@@ -4,12 +4,12 @@ require_once(__DIR__ . "/../connection/connection.php");
 require_once(__DIR__ . "/../services/HabitService.php");
 require_once(__DIR__ . "/../services/ResponseService.php");
 
-class habitController {
+class HabitController {
 
     public static function create() {
         global $connection;
         $data = json_decode(file_get_contents("php://input"), true);
-
+        
         if (HabitService::createHabit($data, $connection)) {
             echo ResponseService::response(200, "Habit created successfully");
         } else {
@@ -20,12 +20,7 @@ class habitController {
     public static function update() {
         global $connection;
         $data = json_decode(file_get_contents("php://input"), true);
-        $id = intval($_GET["id"] ?? 0);
-
-        if ($id <= 0) {
-            echo ResponseService::response(400, "Habit ID is required");
-            return;
-        }
+        $id = $_GET["id"] ;
 
         if (HabitService::updateHabit($data, $id, $connection)) {
             echo ResponseService::response(200, "Habit updated successfully");
@@ -36,31 +31,13 @@ class habitController {
 
     public static function delete() {
         global $connection;
-        $id = intval($_GET["id"] ?? 0);
-
-        if ($id <= 0) {
-            echo ResponseService::response(400, "Habit ID is required");
-            return;
-        }
+        $id = $_GET["id"] ;
 
         if (HabitService::deleteHabit($id, $connection)) {
             echo ResponseService::response(200, "Habit deleted successfully");
         } else {
             echo ResponseService::response(500, "Failed to delete habit");
         }
-    }
-
-    public static function getOne() {
-        global $connection;
-        $id = intval($_GET["id"] ?? 0);
-
-        if ($id <= 0) {
-            echo ResponseService::response(400, "Habit ID is required");
-            return;
-        }
-
-        $habit = HabitService::findHabitById($id, $connection);
-        echo ResponseService::response($habit ? 200 : 404, $habit ?: "Habit not found");
     }
 
     public static function getAll() {
@@ -71,25 +48,16 @@ class habitController {
 
     public static function getByUser() {
         global $connection;
-        $user_id = intval($_GET["user_id"] ?? 0);
+        $user_id = $_GET["user_id"] ;
 
-        if ($user_id <= 0) {
-            echo ResponseService::response(400, "User ID is required");
-            return;
-        }
-
-        $habits = HabitService::findHabitsByUser($user_id, $connection);
+        $habits = HabitService::getByUserId($user_id, $connection);
+        HabitService::getByUserId($user_id, $connection);
         echo ResponseService::response(200, $habits);
     }
-
+  
     public static function toggleStatus() {
         global $connection;
-        $id = intval($_GET["id"] ?? 0);
-
-        if ($id <= 0) {
-            echo ResponseService::response(400, "Habit ID is required");
-            return;
-        }
+        $id = $_GET["id"] ;
 
         if (HabitService::toggleStatus($id, $connection)) {
             echo ResponseService::response(200, "Habit status toggled");

@@ -82,8 +82,13 @@ public static function findById($primaryKeyValue, string $primaryKey, mysqli $co
 
     $stmt->bind_param($value_type, $primaryKeyValue);
     $stmt->execute();
+    $result = $stmt->get_result();
 
-    return $stmt->get_result()->fetch_assoc();
+    $rows = [];
+    while ($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+    return $rows;
 }
 
 

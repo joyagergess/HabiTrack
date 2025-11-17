@@ -18,7 +18,6 @@ class AuthController {
             echo ResponseService::response(400, "Name, email, and password are required");
             return;
         }
-
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
         $data['role'] = $data['role'] ?? 'user';
 
@@ -41,12 +40,10 @@ class AuthController {
         }
 
         $user = AuthService::login($data['email'], $data['password'], $connection);
-
         if (!$user) {
             echo ResponseService::response(401, "Invalid credentials");
             return;
         }
-
         unset($user['password']); 
         echo ResponseService::response(200, $user);
     }

@@ -11,13 +11,21 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        const entries = response.data.data;
+        const entries = response.data.data.filter(e => e.caffeine !== null);
+    
+        const dailyCaffeine = {};
+        entries.forEach(e => {
+          const date = new Date(e.created_at);
+          const dateKey = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 
-        const labels = entries.map(e => {
-            const date = new Date(e.created_at);
-            return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); 
+        if (!dailyCaffeine[dateKey]) {
+            dailyCaffeine[dateKey] = 0;
+        }
+        dailyCaffeine[dateKey] += parseInt(e.caffeine || 0);
         });
-        const caffeineData = entries.map(e => e.caffeine != null ? parseInt(e.caffeine) : 0);
+
+        const labels = Object.keys(dailyCaffeine);
+        const caffeineData = Object.values(dailyCaffeine);
 
         new Chart(ctx, {
             type: 'bar',
@@ -41,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     },
                     title: {
                         display: true,
-                        text: 'Daily Caffeine Intake'
+                        text: 'Daily Caffeine Intake (mg)'
                     }
                 },
                 scales: {

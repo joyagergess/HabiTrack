@@ -12,8 +12,6 @@ class AuthService {
         return $user->create($data, $connection);
     }
 
-
-
     public static function login(string $email, string $password, mysqli $connection) {
         $user = UserService::findUserByEmail($email, $connection);
         if (!$user) return false;

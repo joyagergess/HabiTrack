@@ -12,13 +12,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         const entries = response.data.data;
 
-        const filteredEntries = entries.filter(e => e.sleep_hours != null);
-
-        const labels = entries.map(e => {
-            const date = new Date(e.created_at);
-            return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); 
+        const dailySleep = {};
+        entries.forEach(e => {
+            if (e.sleep_hours != null) {
+                const date = new Date(e.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+                dailySleep[date] = (dailySleep[date] || 0) + parseFloat(e.sleep_hours);
+            }
         });
-        const sleepData = filteredEntries.map(e => parseFloat(e.sleep_hours));
+
+        const labels = Object.keys(dailySleep);
+        const sleepData = Object.values(dailySleep);
 
         new Chart(ctx, {
             type: 'bar',
@@ -38,11 +41,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 responsive: true,
                 plugins: {
                     legend: { display: false },
-                    title: { display: true, text: 'Daily Sleep' }
+                    title: { display: true, text: 'Daily Sleep (Hours/Per day)' }
                 },
-                scales: {
-                    y: { beginAtZero: true }
-                }
+                scales: { y: { beginAtZero: true } }
             }
         });
 

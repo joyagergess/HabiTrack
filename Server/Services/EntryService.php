@@ -25,13 +25,9 @@ class EntryService {
         $entry = new Entry([]);
         return $entry->delete("id", $id, $connection);
     }
-
-    public static function findByUser(int $user_id, mysqli $connection) {
-        $sql = "SELECT * FROM entries WHERE user_id = ?";
-        $stmt = $connection->prepare($sql);
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+  public static function getByUserId(int $userId, mysqli $connection) {
+        return Entry::findById($userId, "user_id", $connection); 
     }
+ 
 }
 ?>

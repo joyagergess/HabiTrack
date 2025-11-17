@@ -90,30 +90,14 @@ class EntryController {
         }
     }
 
-    public static function getOne() {
-        global $connection;
-        $id = intval($_GET['id'] ?? 0);
-
-        if (!$id) {
-            echo ResponseService::response(400, ["message" => "ID required"]);
-            return;
-        }
-
-        $entry = EntryService::getById($id, $connection);
-        if ($entry) {
-            echo ResponseService::response(200, $entry);
-        } else {
-            echo ResponseService::response(404, ["message" => "Entry not found"]);
-        }
-    }
-
+  
     public static function getAll() {
         global $connection;
         $entries = EntryService::getAll($connection);
         echo ResponseService::response(200, $entries);
     }
 
-    public static function getByUser() {
+     public static function getByUser() {
         global $connection;
         $user_id = intval($_GET['user_id'] ?? 0);
 
@@ -122,7 +106,7 @@ class EntryController {
             return;
         }
 
-        $entries = EntryService::findByUser($user_id, $connection);
+        $entries = EntryService::getByUserId($user_id, $connection);
         echo ResponseService::response(200, $entries);
     }
 
