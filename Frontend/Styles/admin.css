@@ -1,9 +1,9 @@
-/* Basic Reset */
+
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
 
 body { background-color: #f4f6fc; color: #333; }
 
-/* Navbar */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -26,10 +26,10 @@ body { background-color: #f4f6fc; color: #333; }
 }
 .btn-primary:hover { background-color: #f0f0f0; }
 
-/* Dashboard layout */
+
 .dashboard { padding: 30px 40px; display: flex; flex-direction: column; gap: 50px; }
 
-/* Stats Section */
+
 .stats-section { background: white; padding: 20px 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .stats-section h2 { margin-bottom: 20px; color: #50aaff; }
 
@@ -46,7 +46,7 @@ body { background-color: #f4f6fc; color: #333; }
 .stat-card h3 { font-size: 1.5rem; color: #50aaff; }
 .stat-card p { font-size: 0.9rem; color: #555; }
 
-/* User Management Section */
+
 .users-section { background: white; padding: 20px 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .users-section h2 { margin-bottom: 15px; color: #50aaff; }
 
@@ -75,5 +75,5 @@ td button {
   margin-right: 5px;
 }
 td .deactivateBtn { background-color: #ff8c00; color: white; }
-td .deleteBtn { background-color: #ff4d4d; color: white; }
+td .deleteHabitBtn , td .deleteUserBtn { background-color: #ff4d4d; color: white; }
 td button:hover { opacity: 0.85; }
