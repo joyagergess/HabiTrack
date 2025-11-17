@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         users.forEach(user => {
             const row = document.createElement("tr");
             row.innerHTML = `
+                <td>${user.id}</td>
                 <td>${user.name}</td>
                 <td>${user.email}</td>
+                <td>${user.created_at}</td>
                 <td>
                     <button class="deleteBtn" id=${user.id}>Delete</button>
                 </td>
