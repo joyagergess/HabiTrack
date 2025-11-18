@@ -365,13 +365,78 @@ p {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .dashboard-sections-container {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 30px;
   }
-  .dashboard-section { max-width: 90%; }
+
+  .dashboard-section {
+    width: 100%;
+    padding: 15px;
+  }
 }
+
+@media (max-width: 700px) {
+  .dashboard-sections-container {
+    grid-template-columns: 1fr; 
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .dashboard-section {
+    width: 95%;
+    padding: 12px;
+  }
+
+  #nutritionInput {
+    width: 90%; 
+  }
+
+  #nutritionAIOutput {
+    max-height: 120px;
+    padding: 8px;
+    margin-top: 8px;
+  }
+
+  .popup-content {
+    max-width: 90%;
+    padding: 12px;
+  }
+
+  .popup-content input,
+  .popup-content textarea {
+    font-size: 13px;
+    padding: 5px;
+  }
+
+  .btn-primary, .btn-secondary {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+  }
+
+  .habit-card, .entry-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 400px) {
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .quick-log-fields input {
+    width: 100%;
+  }
+
+  .equal-card {
+    padding: 10px;
+  }
+}
+
 
 .entry-card {
   padding: 12px;
@@ -425,10 +490,7 @@ p {
   font-size: 14px;
 }
 
-#analyzeNutritionBtn {
-  display: block;
-  margin: 15px auto 0 auto;
-}
+
 #nutritionAIOutput {
   max-height: 150px;       
   overflow-y: auto;        
@@ -436,6 +498,7 @@ p {
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fafafa;
+  margin-top: 10px;
 }
 #habitsList {
   max-height: 400px;    

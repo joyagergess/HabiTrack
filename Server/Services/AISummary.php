@@ -1,28 +1,26 @@
 <?php
+$configPath = __DIR__ . '/config/config.php';
+$config = require $configPath;
+$apiKey = $config['API_KEY'];
+
 $prompts = require_once(__DIR__ . "/PromptService.php");
-
 class AISummary {
-
+ 
     public static function generateWeeklySummary(string $userText): string {
       
         $prompts = require(__DIR__ . "/PromptService.php"); 
-       
-
         $weeklyPrompt = $prompts['weeklySummary'] ;
 
         $fullPrompt = $weeklyPrompt . "\n\nUser Input: " . $userText;
 
         $response = self::sendAIRequest($fullPrompt)
-;
-
         $summary = self::parseAIResponse($response);
 
         return $summary ?: "No summaries for today. ";
     }
 
     public static function sendAIRequest(string $prompt): string {
-        $apiKey ="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"; 
-
+      global $apiKey;
         $data = [
             'model' => 'gpt-4o-mini',
             'messages' => [
