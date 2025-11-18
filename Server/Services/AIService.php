@@ -7,7 +7,6 @@ $apiKey = $config['API_KEY'];
 
 function callAI(string $promptKey, string $userText): ?array {
     global $prompts;
-
     $fullPrompt = $prompts[$promptKey] . "\n\nUser Input: " . $userText;
 
     $response = sendAIRequest($fullPrompt);
