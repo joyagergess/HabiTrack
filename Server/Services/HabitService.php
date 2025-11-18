@@ -27,15 +27,28 @@ class HabitService {
         return Habit::findAll($connection);
     }
 
-   public static function toggleStatus(int $id, mysqli $connection) {
-    $habit = Habit::findById($id, 'id', $connection);
-    if (!$habit) return false;
 
-    $newStatus = $habit['status'] == 1 ? 0 : 1;
+    public static function toggleStatus(int $id, mysqli $connection) {
+        $habit = Habit::findById($id, "id", $connection);
+    
+        if (!$habit || empty($habit[0])) {
+            return false; 
+        }
+    
+        $currentStatus = $habit[0]["status"];
+    
+        $newStatus = $currentStatus == 1 ? 0 : 1;
+    
+        $habitModel = new Habit([]);
+        return $habitModel->update(
+            ['status' => $newStatus],
+            "id",
+            $id,
+            $connection
+        );
+    }
 
-    $habitModel = new Habit([]);
-    return $habitModel->update(['status' => $newStatus], 'id', $id, $connection);
-}
+
 
 }
 

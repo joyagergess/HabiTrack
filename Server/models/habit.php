@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . "/model.php");
 
-class habit extends model {
+class Habit extends Model {
     private ?int $id = null;
     private int $user_id;
     private string $name;
@@ -33,9 +33,5 @@ class habit extends model {
         ];
     }
 
-    public function __toString(): string {
-        return "{$this->id} | {$this->name} | {$this->category} | {$this->target} |
-         Status: {$this->status} | User: {$this->user_id} | {$this->created_at}";
-    }
 }
 ?>

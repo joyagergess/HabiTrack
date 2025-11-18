@@ -1,5 +1,5 @@
 <?php
-abstract class model {
+abstract class Model {
 
     protected static $table; 
 

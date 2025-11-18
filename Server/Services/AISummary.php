@@ -17,7 +17,7 @@ class AISummary {
 
         $summary = self::parseAIResponse($response);
 
-        return $summary ?: "Failed to generate summary. Here are your raw entries: " . $userText;
+        return $summary ?: "No summaries for today. ";
     }
 
     public static function sendAIRequest(string $prompt): string {

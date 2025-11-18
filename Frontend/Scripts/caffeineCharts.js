@@ -10,22 +10,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.log("No entries found or error fetching entries");
             return;
         }
+        const entries = response.data.data;
 
-        const entries = response.data.data.filter(e => e.caffeine !== null);
-    
-        const dailyCaffeine = {};
+        const caffeine = {};
         entries.forEach(e => {
-          const date = new Date(e.created_at);
-          const dateKey = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-
-        if (!dailyCaffeine[dateKey]) {
-            dailyCaffeine[dateKey] = 0;
-        }
-        dailyCaffeine[dateKey] += parseInt(e.caffeine || 0);
+            if (e.sleep_hours != null) {
+                const date = new Date(e.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+                caffeine[date] = ( caffeine[date] || 0) + parseFloat(e.caffeine);
+            }
         });
 
-        const labels = Object.keys(dailyCaffeine);
-        const caffeineData = Object.values(dailyCaffeine);
+        const labels = Object.keys(caffeine);
+        const caffeineData = Object.values(caffeine);
 
         new Chart(ctx, {
             type: 'bar',
@@ -33,10 +29,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Caffeine (mg)',
+                        label: 'Caffeine intake (mg)',
                         data: caffeineData,
-                        backgroundColor: 'rgba(255, 206, 86, 0.7)',
-                        borderColor: 'rgba(255, 206, 86, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
                     }
                 ]
@@ -44,23 +40,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Daily Caffeine Intake (mg)'
-                    }
+                    legend: { display: false },
+                    title: { display: true, text: 'Caffeine intake (mg)' }
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+                scales: { y: { beginAtZero: true } }
             }
         });
 
     } catch (error) {
-        console.error("Error loading caffeine entries for chart:", error);
+        console.error("Error loading sleep entries for chart:", error);
     }
 });

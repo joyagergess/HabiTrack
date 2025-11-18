@@ -6,7 +6,7 @@ require_once(__DIR__ . "/../services/AIService.php");
 require_once(__DIR__ . "/../services/ResponseService.php");
 require_once(__DIR__ . "/../services/CaloriesService.php");
 
-class caloriesController {
+class CaloriesController {
 
     public static function calculateCalories() {
         global $connection;

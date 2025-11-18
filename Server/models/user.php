@@ -1,8 +1,8 @@
 <?php
-require_once(__DIR__ . "/model.php");
+require_once(__DIR__ . "/Model.php");
 
 
-class user extends model {
+class User extends Model {
     protected static  $table = "users";
 
     private ?int $id;            
