@@ -187,6 +187,7 @@ p {
 .login-container h2 {
   color: #50aaff;
   margin-bottom: 20px;
+  
 }
 
 .login-container p {
@@ -219,7 +220,12 @@ p {
 .login-container .btn-primary:hover {
   background-color: #66c0ff;
 }
-
+.login-container label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-weight: 500; 
+}
 .signup-text {
   margin-top: 20px;
   font-size: 0.9rem;
