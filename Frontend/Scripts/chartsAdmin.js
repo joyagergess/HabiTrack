@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     legend: { display: false },
                     title: { display: true, text: 'Number of Active Habits per User' }
                 },
-                scales: { y: { beginAtZero: true, precision: 0 } } // integer y-axis
+                scales: { y: { beginAtZero: true, precision: 0 } } 
             }
         });
 

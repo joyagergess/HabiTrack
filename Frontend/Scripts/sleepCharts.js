@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 responsive: true,
                 plugins: {
                     legend: { display: false },
-                    title: { display: true, text: 'Daily Sleep (Hours/Per day)' }
+                    title: { display: true, text: 'Daily Sleep (Hours)' }
                 },
                 scales: { y: { beginAtZero: true } }
             }

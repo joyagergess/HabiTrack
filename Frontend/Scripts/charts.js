@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const entries = response.data.data;
-       const dailySteps = {};
+        const dailySteps = {};
         entries.forEach(e => {
             const date = new Date(e.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
             dailySteps[date] = (dailySteps[date] || 0) + parseInt(e.steps);

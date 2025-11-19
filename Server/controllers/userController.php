@@ -19,7 +19,6 @@ class UserController {
                 echo ResponseService::response(400, "ID is missing");
                 return;
             }
-
             $id = intval($_GET["id"]);
             $user = UserService::findUserByID($id, $connection);
 
@@ -28,7 +27,6 @@ class UserController {
             } else {
                 echo ResponseService::response(404, "User not found");
             }
-
         } catch (Exception $e) {
             echo ResponseService::response(500, "Server Error: " . $e->getMessage());
         }
@@ -48,14 +46,12 @@ class UserController {
 
     public function createUser() {
         global $connection;
-
         $data = $this->getRequestData();
 
         if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
             echo ResponseService::response(400, "Name, email, and password are required");
             return;
         }
-
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
         $data['role'] = $data['role'] ?? 'user';
 
@@ -70,27 +66,23 @@ class UserController {
 
     public function updateUser() {
         global $connection;
-
         $data = $this->getRequestData();
 
         if (empty($data["id"])) {
             echo ResponseService::response(400, "User ID is required");
             return;
         }
-
         $id = intval($data["id"]);
 
         if (empty($data["name"]) || empty($data["email"])) {
             echo ResponseService::response(400, "Name and email are required");
             return;
         }
-
         if (!empty($data["password"])) {
             $data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
         } else {
             unset($data["password"]);
         }
-
         $updated = UserService::updateUser($data, $id, $connection);
 
         if ($updated) {

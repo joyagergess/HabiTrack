@@ -1,5 +1,4 @@
 
-
 document.getElementById("signup-btn").addEventListener('click', async () => {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
