@@ -21,30 +21,18 @@ class AuthController {
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
         $data['role'] = $data['role'] ?? 'user';
 
-        $user = AuthService::signup($data, $connection);
-
-        if ($user) {
-            echo ResponseService::response(200, "Signup successful");
-        } else {
-            echo ResponseService::response(500, "Signup failed, maybe email exists");
-        }
+        AuthService::signup($data, $connection);
     }
 
-    public function login() {
-        global $connection;
-        $data = $this->getRequestData();
+   public function login() {
+     global $connection;
+     $data = $this->getRequestData();
 
-        if (empty($data['email']) || empty($data['password'])) {
-            echo ResponseService::response(400, "Email and password required");
-            return;
-        }
+     if (empty($data['email']) || empty($data['password'])) {
+        echo ResponseService::response(400, "Email and password required");
+        return;
+     }
+     AuthService::login($data['email'], $data['password'], $connection);
+   }
 
-        $user = AuthService::login($data['email'], $data['password'], $connection);
-        if (!$user) {
-            echo ResponseService::response(401, "Invalid credentials");
-            return;
-        }
-        unset($user['password']); 
-        echo ResponseService::response(200, $user);
-    }
 }

@@ -18,15 +18,15 @@ document.getElementById("signup-btn").addEventListener('click', async () => {
     try {
         response = await axios.post(`${base_url}/auth/signup`, { name, email, password });
 
-        if (response.data.status === 200) {
+        if (response.data.status === 201) {
             signupMessage.style.color = "green";
-            signupMessage.textContent = "Signup successful! You can login now.";
-            console.log("Response data:", response.data);
+            signupMessage.textContent = response.data.data;
+            console.log("Response data:", response.data.data);
         } else {
             signupMessage.style.color = "red";
-            signupMessage.textContent = response.data.message || "Signup failed";
+            signupMessage.textContent = response.data.data || "Signup failed";
         }
-
+    
     } catch (error) {
         console.error("Axios error:", error);
 

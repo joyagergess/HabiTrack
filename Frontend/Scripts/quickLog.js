@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("quickCaffeine").value = "";
 
                 if (typeof loadEntries === "function") loadEntries();
+                
             } else {
                 alert(response.data.message || "Failed to save quick log");
             }

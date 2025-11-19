@@ -13,7 +13,7 @@ class AISummary {
 
         $fullPrompt = $weeklyPrompt . "\n\nUser Input: " . $userText;
 
-        $response = self::sendAIRequest($fullPrompt)
+        $response = self::sendAIRequest($fullPrompt);
         $summary = self::parseAIResponse($response);
 
         return $summary ?: "No summaries for today. ";

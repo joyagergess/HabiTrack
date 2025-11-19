@@ -35,8 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             entryPopup.classList.add("hidden");
-       
-
             loadEntries();
             
         } catch (error) {
@@ -83,7 +81,7 @@ async function loadEntries() {
                 hour: "2-digit",
                 minute: "2-digit"
             });
-            dateDiv.textContent = `🗓️ ${formattedDate}`;
+            dateDiv.textContent = ` ${formattedDate}`;
 
             const textDiv = document.createElement("div");
             textDiv.className = "entry-text";
@@ -104,7 +102,6 @@ async function loadEntries() {
 
             actions.append(editBtn, deleteBtn);
 
-     
             card.append(dateDiv, textDiv, actions);
 
             entryListContainer.appendChild(card);

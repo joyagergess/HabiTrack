@@ -18,6 +18,7 @@ document.getElementById("login-btn").addEventListener('click', async () => {
     try {
     
         response = await axios.post(`${base_url}/auth/login`, { email, password });
+       
 
         if (response.data.status === 200) {
             loginMessage.style.color = "green";
@@ -37,7 +38,7 @@ document.getElementById("login-btn").addEventListener('click', async () => {
             }
         } else {
             loginMessage.style.color = "red";
-            loginMessage.textContent = response.data.message || "Login failed";
+            loginMessage.textContent = response.data.data || "Login failed";
         }
 
     } catch (error) {
@@ -49,3 +50,4 @@ document.getElementById("login-btn").addEventListener('click', async () => {
     }
 });
 
+console.log("hello")

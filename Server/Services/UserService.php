@@ -34,6 +34,33 @@ class UserService {
     $stmt->execute();
     return $stmt->get_result()->fetch_assoc();
    }  
+   
+   
+    public static function findUserByName(string $name, mysqli $connection) {
+        $sql = "SELECT * FROM users WHERE name = ?";
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param("s", $name);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+  public static function findUserByPassword(string $password, mysqli $connection) {
+    $sql = "SELECT password FROM users";
+    $result = $connection->query($sql);
+
+    if (!$result) return null;
+
+    while ($row = $result->fetch_assoc()) {
+        if (password_verify($password, $row['password'])) {
+            return true;
+        }
+    }
+
+    return false; 
+}
 
 }
+
+
+
 ?>
