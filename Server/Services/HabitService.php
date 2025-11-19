@@ -36,7 +36,6 @@ class HabitService {
         }
     
         $currentStatus = $habit[0]["status"];
-    
         $newStatus = $currentStatus == 1 ? 0 : 1;
     
         $habitModel = new Habit([]);
