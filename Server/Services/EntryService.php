@@ -10,7 +10,7 @@ class EntryService {
     public static function getById(int $id, mysqli $connection) {
         return Entry::findById($id, "id", $connection);
     }
-
+    
     public static function create(array $data, mysqli $connection) {
         $entry = new Entry($data);
         return $entry->create($data, $connection); 
